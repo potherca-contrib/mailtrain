@@ -54,13 +54,44 @@ Mailtrain uses [node-config](https://github.com/lorenwest/node-config) for confi
   2. {NODE_ENV}.toml (eg. development.toml or production.toml)
   3. local.js
 
-### Running behind Nginx proxy
+## Running behind Nginx proxy
 
 Edit [mailtrain.nginx](setup/mailtrain.nginx) (update `server_name` directive) and copy it to `/etc/nginx/sites-enabled`
 
-### Running as an Upstart service in Ubuntu 14.04
+## Running as an Upstart service in Ubuntu 14.04
 
 Edit [mailtrain.conf](setup/mailtrain.conf) (update application folder) and copy it to `/etc/init`
+
+## Deploy to Heroku
+
+You can quickly deploy MailTrain to [Heroku](https://heroku.com/) using the provided "Deploy to Heroku" button:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+This will deploy your very own instance of MailTrain on Heroku, including the needed Add-ons and Config Variables.
+
+### Add-ons
+
+MailTrain requires a Mysql and Redis database to function, these are automatically added.
+As Heroku does not preserve logs, an add-on to persist logs is also added.
+
+The free tier of the following add-ons will be used:
+
+ - [Heroku Redis](https://elements.heroku.com/addons/heroku-redis) (Hobby Dev)
+ - [JawsDB Maria](https://elements.heroku.com/addons/jawsdb-maria) (Kitefin)
+ - [PaperTrail](https://elements.heroku.com/addons/papertrail) (Choklad)
+
+If another add-on is preferred to provide a database, this can be changed at a later time.
+In such a case the corresponding variables will need to be changed in the `custom-environment-variables.json` file or overwritten from the `NODE_CONFIG` environment variable.
+
+### Config Variables
+
+The following environmental variables are used for/by a Heroku deploy:
+
+- `JAWSDB_MARIA_URL` - URL where the MariaDB database resides.
+- `NODE_CONFIG` - Used to overwrite settings defined in the `default.toml`.
+- `REDIS_URL` - URL where the Redis database resides.
+- `WWW_SECRET` - Secret for signing the session ID cookie.
 
 ## Nitrous Quickstart
 

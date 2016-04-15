@@ -1,0 +1,9 @@
+{
+  "www": {
+    "secret":"WWW_SECRET"
+  },
+  "mysql": "JAWSDB_MARIA_URL",
+  "redis": {
+    "url": "REDIS_URL"
+  }
+}

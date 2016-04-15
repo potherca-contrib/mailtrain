@@ -1,0 +1,39 @@
+{
+  "name": "MailTrain",
+  "description": "Self hosted email newsletter app",
+  "keywords": [
+    "mail",
+    "email",
+    "newsletter",
+    "mailchimp"
+  ],
+  "website": "https://github.com/andris9/mailtrain",
+  "repository": "git://github.com/andris9/mailtrain.git",
+  "logo": "https://mailtrain.org/mailtrain.png",
+  "success_url": "/users/login?next=%2Fsettings",
+  "scripts": {
+    "postdeploy": "bash heroku-post-create.sh"
+  },
+  "env": {
+    "WWW_SECRET": {
+      "required": true,
+      "description": "Secret for signing the session ID cookie.",
+      "generator": "secret"
+    },
+    "NODE_CONFIG": {
+      "description": "",
+      "value": "{ \"redis\": { \"enabled\": true }, \"log\": { \"level\": \"error\" } }"
+    }
+  },
+  "image": "heroku/nodejs",
+  "addons": [
+    "heroku-redis:hobby-dev",
+    "jawsdb-maria:kitefin",
+    "papertrail:choklad"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
